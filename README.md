@@ -125,16 +125,16 @@ My account is locked and I need urgent help
 
 ## Quick Start
 
-1. Clone the repository  
-git clone https://github.com/MahleMeyi/FUTURE_ML_02.git
-cd FUTURE_ML_02
-2. Install dependencies
-Make sure you have Python installed (Python 3.8+ recommended), then run:
-pip install pandas numpy scikit-learn matplotlib
-3. Run the notebook in Jupyter or Google Colab(Recommended)
-Open the .ipynb file in Google Colab
-Upload the dataset (aa_dataset_tickets_multi_lang.csv)
-Run all cells
+1. Clone the repository    
+git clone https://github.com/MahleMeyi/FUTURE_ML_02.git  
+cd FUTURE_ML_02  
+2. Install dependencies  
+Make sure you have Python installed (Python 3.8+ recommended), then run:  
+pip install pandas numpy scikit-learn matplotlib  
+3. Run the notebook in Jupyter or Google Colab(Recommended)  
+Open the .ipynb file in Google Colab  
+Upload the dataset (aa_dataset_tickets_multi_lang.csv)  
+Run all cells  
 
 ## Conclusion
 
