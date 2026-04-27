@@ -1,67 +1,142 @@
 # Customer Support Ticket Classification & Priority Prediction
 
 ## Overview
-This project implements a Natural Language Processing (NLP) system that automatically classifies customer support tickets and assigns priority levels.  
-The goal is to help support teams organize incoming requests and respond more efficiently.
 
-## What This Project Does
-- Cleans and preprocesses raw support ticket text  
-- Converts text into numerical features using TF-IDF  
-- Classifies tickets into categories (e.g., Account, Security, Billing)  
-- Predicts priority levels (High, Medium, Low)  
-- Evaluates model performance using standard metrics  
-- Visualizes ticket category and priority distributions  
+This project presents a Natural Language Processing (NLP) system that automatically classifies customer support tickets and assigns priority levels.
+The goal is to help support teams organize incoming requests, identify urgent issues faster, and improve response efficiency.
 
-##  Project Workflow
-Raw Ticket Data -> Text Cleaning -> TF-IDF Vectorization -> Model Training -> Prediction -> Evaluation
+## Key Features
 
-## Tools & Technologies
-- Python  
-- Pandas  
-- Scikit-learn  
-- Matplotlib  
-- Google Colab
+- Text preprocessing (cleaning and normalization)  
+- Feature extraction using TF-IDF  
+- Ticket category classification (e.g., Account, Security, Billing)  
+- Priority prediction (High / Medium / Low)  
+- Handling class imbalance  
+- Model evaluation using precision, recall, and F1-score  
+- Data visualization for insights  
+
+## Project Workflow
+
+Raw Data → Text Preprocessing → Feature Engineering → TF-IDF → Model Training → Prediction → Evaluation
+
+## Dataset Description
+
+The dataset consists of real-world customer support tickets with the following fields:
+
+- **subject** → short summary of the issue  
+- **body** → detailed ticket message  
+- **tag_1** → ticket category (target for classification)  
+- **priority** → urgency level (target for prediction)  
+- **language** → ticket language  
+
+### Preprocessing Steps
+
+- Filtered English-language tickets  
+- Removed missing values  
+- Combined **subject + body** for richer text representation  
+- Cleaned text (lowercasing, removing special characters)  
+- Removed rare categories (less than 20 samples) to address class imbalance  
 
 ## Model Approach
-The dataset was filtered to include only English-language tickets and cleaned to remove noise such as punctuation and special characters.  
-Text data was transformed using TF-IDF vectorization, allowing machine learning models to understand word importance.  
-Two classification models were built using Multinomial Naive Bayes:
-- **Category Model** -> predicts the type of support ticket  
-- **Priority Model** -> predicts the urgency level  
 
-## Results
-- The models achieved reasonable accuracy in both classification tasks  
-- Performance is stronger on frequently occurring categories  
-- Some misclassifications occur due to similar wording between tickets
+### Feature Engineering
+
+Text data is transformed using **TF-IDF vectorization**, capturing the importance of words across the dataset.
+
+### Models Used
+
+Two supervised machine learning models were built using **Logistic Regression**:
+
+- **Category Model**
+  - Input: Ticket text  
+  - Output: Ticket category (tag_1)
+
+- **Priority Model**
+  - Input: Ticket text  
+  - Output: Priority level (high, medium, low)
+
+Updated version:
+- Replaced Naive Bayes with Logistic Regression
+- Applied class balancing to improve performance
+
+### Why Logistic Regression?
+
+- Performs well on high-dimensional text data  
+- Works effectively with TF-IDF features  
+- Supports class weighting to reduce bias toward dominant classes  
+
+## Handling Class Imbalance
+
+The dataset contained many low-frequency categories, which affected model performance.
+
+To address this:
+
+- Categories with fewer than 20 samples were removed  
+- Class weighting (class_weight='balanced') was applied  
+
+These steps improved model generalization and reduced bias toward dominant categories.
+
+## Results & Evaluation
+
+Models were evaluated using:
+- Accuracy  
+- Precision  
+- Recall  
+- F1-score 
+
+### Key Observations
+
+- Improved performance compared to the initial Naive Bayes baseline  
+- Strong results on frequently occurring categories  
+- Better handling of minority classes after filtering  
+- Reduced occurrence of zero-score predictions  
 
 ## Visualizations
 
-### Top Ticket Categories
-<img width="664" height="607" alt="image" src="https://github.com/user-attachments/assets/cd9adf22-31a3-45f9-a237-fe20531080ea" />
-
-### Priority Distribution
-<img width="637" height="561" alt="image" src="https://github.com/user-attachments/assets/4ec6bded-4180-4a2b-a895-c1b9d82b9628" />
+### Top Ticket Categories  
+<img width="655" height="599" alt="image" src="https://github.com/user-attachments/assets/0a0e5547-eb18-4f93-9d9e-a94b3680297d" />
+ 
+### Priority Distribution  
+<img width="630" height="573" alt="image" src="https://github.com/user-attachments/assets/85dc0697-5f43-4dbd-9cae-a3bef44bccd1" />
 
 ## Example Prediction
 
-**Input:**
-My account is locked and I need urgent help
+**Input:**  
+My account is locked and I need urgent help  
 
-**Output:**
-Category: Account
-Priority: High
+**Output:**  
+- Category: Account  
+- Priority: High  
 
 ## Insights
+
+- Customer support data is highly imbalanced  
 - A small number of categories dominate the dataset  
-- Priority prediction helps identify urgent issues quickly  
-- Text similarity between categories can affect model accuracy  
+- Combining subject and body improves classification performance  
+- Model performance is strongly influenced by data distribution  
 
 ## Future Improvements
-- Experiment with advanced NLP models (e.g., LSTM, Transformers)  
+
+- Experiment with advanced NLP models (e.g., Transformers, BERT)  
+- Apply oversampling techniques for minority classes  
 - Perform hyperparameter tuning  
-- Handle class imbalance for better accuracy  
 - Deploy as a web application or API  
+- Build a real-time ticket processing system  
+
+## Quick Start
+
+1. Clone the repository  
+git clone https://github.com/MahleMeyi/FUTURE_ML_02.git
+cd FUTURE_ML_02
+2. Install dependencies
+Make sure you have Python installed (Python 3.8+ recommended), then run:
+pip install pandas numpy scikit-learn matplotlib
+3. Run the notebook in Jupyter or Google Colab(Recommended)
+Open the .ipynb file in Google Colab
+Upload the dataset (aa_dataset_tickets_multi_lang.csv)
+Run all cells
 
 ## Conclusion
-This project demonstrates how NLP and machine learning can automate customer support workflows.  
-By classifying tickets and assigning priority levels, organizations can improve response times and the overall efficiency.
+
+This project demonstrates how NLP and machine learning can automate customer support workflows.
+By classifying tickets and predicting priority levels, organizations can streamline operations, reduce response time, and improve customer experience.
